@@ -35,7 +35,7 @@ public class Main{
 			for(int j=0; j<N; j++) {
 				if(map[i][j] == 1 && !visited[i][j]) {
 					areaCount++; // 2차원 배열을 수행하면서 집의 갯수를 증가
-					BFS(i, j);
+					BFS(i, j); // BFS수행하기
 				}
 			}
 		}
@@ -53,20 +53,21 @@ public class Main{
 
 	public static void BFS(int x, int y) {
 		Queue<Node> q = new LinkedList<>(); //queue를 사용하기 위한 LinkedList 선언
-		int count = 0; //처음 갯수는 0으로 지정
+		int count = 1; //처음 갯수는 0으로 지정
 		q.add(new Node(x, y)); // q에 정보 저장
 		visited[x][y] = true; // 방문 처리 
 
 		while(!q.isEmpty()) { // q가 빌 때 까지 while문으로 반복 수행
 			Node node = q.poll(); // 첫 원소 뽑아서 출력
-			count++; // 갯수 증가 
+
 			for(int i=0; i<4; i++) { // 상하좌우 탐색 시작 
 				int nx = node.x + dx[i]; // nx로 업데이트 
 				int ny = node.y + dy[i]; // ny로 업데이트 
 				if(nx >= 0 && ny >=0 && nx < N && ny <N ) { //범위를벗어 나지 않는 선에서 실행 
 					if(!visited[nx][ny] && map[nx][ny] == 1) { //단지가 존재하고 방문 한적이 없으면 
 						visited[nx][ny]  = true; //방문 처리 
-						q.add(new Node(nx, ny)); //방문처리된 노드를 q에 저장. 계속 반복 
+						count++; // 갯수 증가 
+						q.add(new Node(nx, ny)); //방문처리된 노드를 q에 저장. 계속 반복
 					}
 
 				}
